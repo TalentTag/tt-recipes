@@ -1,0 +1,46 @@
+DEPENDENCIES
+  etckeeper
+    path: cookbooks/etckeeper
+  nginx
+    path: cookbooks/nginx
+  op
+    path: cookbooks/op
+  rbenv
+    git: git://github.com/fnichol/chef-rbenv.git
+    revision: f2b53292e810dd2b43f6121f9958f5f29979dcb1
+    branch: v0.7.2
+  ruby_build
+  simple_iptables
+    git: git://github.com/haron/cookbook-simple-iptables.git
+    revision: 54664e87b21f8bb064682527c3022253a04086fb
+    tag: 0.6.1
+  talenttag
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.6.0)
+  etckeeper (0.1.0)
+  java (1.29.0)
+  nginx (0.2.4)
+    apt (>= 0.0.0)
+    simple_iptables (>= 0.0.0)
+  ohai (2.0.1)
+  op (0.2.9)
+    apt (>= 0.0.0)
+    etckeeper (>= 0.0.0)
+    simple_iptables (>= 0.0.0)
+    sysctl (>= 0.0.0)
+  rbenv (0.7.2)
+    java (> 1.4.0)
+    ruby_build (>= 0.0.0)
+  ruby_build (0.8.0)
+  simple_iptables (0.6.1)
+  sysctl (0.6.0)
+    ohai (>= 0.0.0)
+  talenttag (0.1.0)
+    nginx (>= 0.0.0)
+    op (>= 0.0.0)
+    rbenv (>= 0.0.0)
+    ruby_build (>= 0.0.0)
+    simple_iptables (>= 0.0.0)
