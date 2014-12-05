@@ -1,10 +1,10 @@
 DEPENDENCIES
   etckeeper
-    path: cookbooks/etckeeper
+    path: ../etckeeper
   nginx
-    path: cookbooks/nginx
+    path: ../nginx
   op
-    path: cookbooks/op
+    path: ../op
   rbenv
     git: git://github.com/fnichol/chef-rbenv.git
     revision: f2b53292e810dd2b43f6121f9958f5f29979dcb1

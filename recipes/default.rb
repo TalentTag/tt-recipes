@@ -4,7 +4,6 @@ include_recipe "ruby_build"
 
 package "postgresql"
 package "postgresql-contrib"
-package "sphinxsearch"
 package "nodejs"
 # package "unicorn"
 package "libssl-dev"
@@ -30,3 +29,12 @@ gem_package "bundler"
 # }
 # rbenv_ruby "2.1.4"
 # # rbenv_global "2.1.4"
+
+apt_repository "sphinxsearch" do
+    uri "ppa:builds/sphinxsearch-stable"
+    distribution "precise"
+end
+
+package "sphinxsearch" do
+    version "2.0.11-rel20-4525-0ubuntu10"
+end
