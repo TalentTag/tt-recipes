@@ -38,3 +38,9 @@ end
 package "sphinxsearch" do
     version "2.0.11-rel20-4525-0ubuntu10"
 end
+
+simple_iptables_rule "permitted" do
+    rule "--proto tcp --dport 3000"
+    jump "ACCEPT"
+end
+
