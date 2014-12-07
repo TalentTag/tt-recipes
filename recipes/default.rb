@@ -1,4 +1,5 @@
 include_recipe "op"
+include_recipe "op::exim-minimal"
 include_recipe "nginx"
 include_recipe "ruby_build"
 
@@ -30,13 +31,16 @@ gem_package "bundler"
 # rbenv_ruby "2.1.4"
 # # rbenv_global "2.1.4"
 
-apt_repository "sphinxsearch" do
-    uri "ppa:builds/sphinxsearch-stable"
-    distribution "precise"
+package "debian-archive-keyring"
+
+apt_repository "sid" do
+    uri "http://ftp.de.debian.org/debian"
+    distribution "sid"
+    components ["main"]
 end
 
 package "sphinxsearch" do
-    version "2.0.11-rel20-4525-0ubuntu10"
+    version "2.2.5-1"
 end
 
 simple_iptables_rule "permitted" do
