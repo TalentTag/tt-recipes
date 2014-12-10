@@ -1,7 +1,7 @@
 name             'talenttag'
 maintainer       'Alex Ryabov'
 maintainer_email 'alex.ryabov@gmail.com'
-version          '0.1.0'
+version          '0.1.1'
 
 depends          'op'
 depends          'nginx'
