@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision :shell, :inline => "chef-solo --version || wget -qO - https://www.opscode.com/chef/install.sh | sudo sh; [ -n \"$(find /var/cache/apt/pkgcache.bin -mmin -60)\" ] || sudo apt-get -qq update"
     # config.berkshelf.enabled = true
     config.vm.provision "chef_solo" do |chef|
+      chef.add_recipe "ruby_build"
       chef.add_recipe "talenttag"
       chef.verbose_logging = true
     end

@@ -1,35 +1,32 @@
 include_recipe "op"
 include_recipe "op::exim-minimal"
 include_recipe "nginx"
-include_recipe "ruby_build"
+include_recipe "talenttag::ruby"
 
 package "postgresql"
 package "postgresql-contrib"
 package "nodejs"
-# package "unicorn"
 package "libssl-dev"
 package "redis-server"
-# package "rbenv"
 package "build-essential"
 package "libmysqlclient-dev"
 package "libpq-dev"
+package "libreadline-dev"
 
-# include_recipe "rbenv::system"
-
-ruby_build_ruby "2.1.4" do
-    prefix_path "/usr"
-    action :reinstall
-    not_if { `ruby --version`.start_with? "ruby 2.1.4" }
+group "rbdev" do
+    gid 501
+    not_if "grep deploy /etc/group"
 end
 
-gem_package "bundler"
-
-# node.default[:rbenv] = {
-#     :rubies => [ "2.1.4" ],
-#     :global => "2.1.4"
-# }
-# rbenv_ruby "2.1.4"
-# # rbenv_global "2.1.4"
+user "rbdev" do
+    uid 501
+    gid "rbdev"
+    shell "/bin/bash"
+    home "/home/rbdev"
+    supports :manage_home => true
+    manage_home true
+    not_if "id rbdev"
+end
 
 package "debian-archive-keyring"
 
@@ -41,6 +38,7 @@ end
 
 package "sphinxsearch" do
     version "2.2.5-1"
+    options '-o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"'
 end
 
 simple_iptables_rule "permitted" do
