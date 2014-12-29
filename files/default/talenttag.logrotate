@@ -1,0 +1,54 @@
+/var/www/talenttag/shared/log/production.searchd*.log {
+    su
+    rotate 10
+    size 1M
+    compress
+    missingok
+    sharedscripts
+    postrotate
+        pkill -USR1 -f searchd
+    endscript
+}
+
+/var/www/talenttag/shared/log/puma*.log /var/www/talenttag/shared/log/production.log {
+    su
+    rotate 10
+    size 1M
+    compress
+    missingok
+    postrotate
+        kill -HUP `cat /var/www/talenttag/shared/pids/puma.pid`
+    endscript
+}
+
+/var/www/talenttag/shared/log/unicorn*.log {
+    su
+    rotate 10
+    size 10M
+    compress
+    missingok
+    sharedscripts
+    postrotate
+        kill -HUP `cat /var/www/talenttag/shared/pids/unicorn.pid`
+    endscript
+}
+
+/var/www/talenttag/shared/log/nginx*.log {
+    su
+    size 1M
+    missingok
+    rotate 10
+    compress
+    delaycompress
+    notifempty
+    create 0640 www-data adm
+    sharedscripts
+    prerotate
+        if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+            run-parts /etc/logrotate.d/httpd-prerotate; \
+        fi \
+    endscript
+    postrotate
+        invoke-rc.d nginx rotate >/dev/null 2>&1
+    endscript
+}

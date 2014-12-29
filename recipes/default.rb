@@ -46,3 +46,6 @@ simple_iptables_rule "permitted" do
     jump "ACCEPT"
 end
 
+cookbook_file "/etc/logrotate.d/talenttag" do
+    source "talenttag.logrotate"
+end
